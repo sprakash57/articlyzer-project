@@ -13,7 +13,7 @@
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
 
     <!-- Favicons -->
 <link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
@@ -24,6 +24,7 @@
 <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
 <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
 <meta name="theme-color" content="#563d7c">
+
 
 
     <style>
@@ -46,20 +47,59 @@
           font-size: 3.5rem;
         }
       }
+
+      .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        text-align: center;
+      }
+
+      .textcolor {
+        color: #fff;
+        text-shadow: 0 .1rem .3rem rgba(0, 0, 0, .8);
+      }
+
+      .statsstyle {
+        font-family: monospace;
+      }
+
+      .textstyle {
+        font-family: 'Abril Fatface', cursive;
+        font-size: 1.5rem;
+      }
+
+      .resetbutton {
+        background-color: #df2b3d;
+        color: #fff;
+        border-radius: .25rem;
+        text-align: center;
+        padding: 7px;
+        display: block;
+        width: 100%;
+        font-size: 16px;
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15);
+      }
+      .resetbutton:hover {
+        color: #fff;
+        background-color: #e01227;
+        text-decoration: none;
+      }
     </style>
+
     <!-- Custom styles for this template -->
-    <link href="cover.css" rel="stylesheet">
+    <!-- <link href="/static/cover.css" rel="stylesheet"> -->
   </head>
   <body class="colbckgrnd">
   <nav class="navbar navbar-expand-sm bg-light navbar-light">
     <a class="navbar-brand" href="">
-    <img src="{% static 'file.png' %}" alt="image" height="25" width="25" class="d-inline-block align-top"></img>WORD-COUNTER</a>
+    <!-- <img src="{% static 'file.png' %}" alt="image" height="30" width="30" class="d-inline-block align-top"> -->
+    <img src="{% static 'file.png' %}" alt="image" height="30" width="30"><span class="textstyle ml-2">Articlyzer</span></a>
+    <!-- <p class = "textstyle">ARTICLYZER</img></p></a> -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="#">Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
+        <a class="nav-link" href="">V1.0.0</a>
       </li>
     </ul>
   </nav>
@@ -67,48 +107,42 @@
 </br>
 
     <div class="container">
-      <div class="row">
-        <div class="col-md-12 offset-mid-1">
-          <!-- <label for="inputtext">Type your text here</label> -->
-          <h5>Please enter your text here</h5>
-            <textarea class="form-control" id="inputtext" rows="10"></textarea>
-            <div class="invalid-feedback">
-              Text is required.
-            </div>
+      <div class="row mb-5">
+        <div class="col-12 pl-0">
+          <h4 class="textcolor">Please enter your text here</h4>
+          <form action="/count/" method="POST">
+            {% csrf_token %}
+            <textarea class="form-control shadow-lg" name="fulltext" rows="10">{{fulltext}}</textarea>
         </div>
       </div>
-    </div>
-    </br>
-    </br>
-    <div class="container">
       <div class="row">   
-        <div class="col-md-6 offset-md-1 card">
-          <div class="card-header text-dark text-center">Stats</div>
-          <div class="card-body text-dark">
-            <p>There are {{ countotal }} number of words in the text.</p>
+        <div class="col-8 bg-light text-dark p-2 border">
+            <h6 class="statsstyle">Total words: {{ count }}</h6>
+            <h6 class="statsstyle"> Top 3 frequent words: {{ mostfrqwords }} </h6>
+            <h6 class="statsstyle">Time to read the text: {{ time }}</h6>
           </div>
+        <div class="col-2">
+            <a class="resetbutton" href="{% url 'home' %}">Reset</a>
         </div>
-        <div class="col-md-2">
-            <button type="button" class="btn btn-block btn-primary">Reset</button>
-        </div>
-        <div class="col-md-2">
-            <button type="button" class="btn btn-block btn-primary">Submit</button>
+        <div class="col-2">
+            <button type="submit" class="btn btn-block btn-success shadow">Submit</button>
         </div>
       </div>
-    </div>
-  </br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
-</br>
+          </form> 
+      <div class="row">
+        <div class="col-12 mt-2 pl-0">
+          <small>**Calculation is based on the <span><a href="https://ezinearticles.com/?What-is-the-Average-Reading-Speed-and-the-Best-Rate-of-Reading?&id=2298503">average reading speed</span></a> which on an avg is 200-250 words per minute (wpm)</small>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 pl-0">
+          <small>Liked my work? Please visit my <a target="_blank" href="https://www.linkedin.com/feed/">LinkedIn page.</a></small>
+        </div>
+      </div>
   </body>
   <footer class="text-muted">
-    <div class="container text-center">
+    <!-- <div class="container text-center"> -->
+    <div class="footer">
       <p>© Indrani Biswas {% now "Y" %}</p>
     </div>
   </footer>
