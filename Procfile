@@ -1,1 +1,3 @@
-web: gunicorn articlyzer_project.wsgi
+web: gunicorn articlyzer-project.wsgi:application --log-file - --log-level debug
+python manage.py collectstatic --noinput
+manage.py migrate
