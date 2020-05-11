@@ -26,7 +26,7 @@ SECRET_KEY = 'l5hn3edh#3l--+c)o$ck9ckz4uo+#p#3f%c1)&c8!$r02lt74*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1','.herokuapp.com']
 
 
 # Application definition
@@ -127,4 +127,3 @@ STATIC_URL = '/static/'
 
 # Activate Django-Heroku
 django_heroku.settings(locals())
-

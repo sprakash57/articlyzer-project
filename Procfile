@@ -1,1 +1,1 @@
-web: gunicorn articlyzer-project.wsgi
+web: gunicorn articlyzer-project.wsgi --log-file -
