@@ -27,7 +27,7 @@ SECRET_KEY = 'jfu$ffsbgsub^3g_eh_dzsv#k0+uk6a$ek92%l^*@e6-l^gx)u'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','https://articlyzer-project.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','articlyzer-project.herokuapp.com']
 
 
 # Application definition

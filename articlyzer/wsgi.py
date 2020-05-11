@@ -11,6 +11,6 @@ import os
 # from django.core.configurations.wsgi import get_wsgi_application
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'articlyzer-project.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'articlyzer.settings')
 
 application = get_wsgi_application()
