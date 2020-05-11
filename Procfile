@@ -1,1 +1,1 @@
-web: gunicorn articlyser.wsgi
+web: gunicorn articlyzer-project.wsgi
