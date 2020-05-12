@@ -37,4 +37,9 @@ def count(request):
     mfw = ', '.join(l)
     val = math.ceil(cntr/200)
 
-    return render(request, 'home.html', {'count':len(wordlist), 'mostfrqwords':mfw, 'time':val, 'fulltext': fulltext})
+    if val > 1:
+        unit = 'minutes'
+    else:
+        unit = 'minute'
+
+    return render(request, 'home.html', {'count':len(wordlist), 'mostfrqwords':mfw, 'time':val, 'unit': unit, 'fulltext': fulltext})

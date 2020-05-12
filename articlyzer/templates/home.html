@@ -7,7 +7,7 @@
     <!-- <meta name="description" content=""> -->
     <!-- <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v3.8.6"> -->
-    <title>Articlyzer App</title>
+    <title>Articlyzer</title>
 
     <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/cover/"> -->
 
@@ -93,13 +93,13 @@
   </head>
   <body class="colbckgrnd">
   <nav class="navbar navbar-expand-sm bg-light navbar-light">
-    <a class="navbar-brand" href="">
+    <a rel="noopener noreferrer" class="navbar-brand" href="">
     <!-- <img src="{% static 'file.png' %}" alt="image" height="30" width="30" class="d-inline-block align-top"> -->
     <img src="{% static 'file.png' %}" alt="image" height="30" width="30"><span class="textstyle ml-2">Articlyzer</span></a>
     <!-- <p class = "textstyle">ARTICLYZER</img></p></a> -->
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" href="">V1.0.0</a>
+        <a rel="noopener noreferrer" class="nav-link" href="">V1.0.1</a>
       </li>
     </ul>
   </nav>
@@ -119,10 +119,10 @@
         <div class="col-8 bg-light text-dark p-2 border">
             <h6 class="statsstyle">Total words: {{ count }}</h6>
             <h6 class="statsstyle"> Top 3 frequent words: {{ mostfrqwords }} </h6>
-            <h6 class="statsstyle">Time to read the text: {{ time }}</h6>
+            <h6 class="statsstyle">Time to read the text: {{ time }} {{ unit }}</h6>
           </div>
         <div class="col-2">
-            <a class="resetbutton" href="{% url 'home' %}">Reset</a>
+            <a rel="noopener noreferrer" class="resetbutton" href="{% url 'home' %}">Reset</a>
         </div>
         <div class="col-2">
             <button type="submit" class="btn btn-block btn-success shadow">Do Analysis</button>
@@ -131,12 +131,12 @@
           </form> 
       <div class="row">
         <div class="col-12 mt-2 pl-0">
-          <small>**Calculation is based on the <span><a href="https://ezinearticles.com/?What-is-the-Average-Reading-Speed-and-the-Best-Rate-of-Reading?&id=2298503">average reading speed</span></a> which on an avg is 200-250 words per minute (wpm)</small>
+          <small>**Calculation is based on the <span><a rel="noopener noreferrer" href="https://ezinearticles.com/?What-is-the-Average-Reading-Speed-and-the-Best-Rate-of-Reading?&id=2298503">average reading speed</span></a> which on an avg is 200-250 words per minute (wpm)</small>
         </div>
       </div>
       <div class="row">
         <div class="col-12 pl-0">
-          <small>Liked my work? Please visit my <a target="_blank" href="https://www.linkedin.com/feed/">LinkedIn page.</a></small>
+          <small>Liked my work? Please visit my <a rel="noopener noreferrer" target="_blank" href="https://www.linkedin.com/feed/">LinkedIn page.</a></small>
         </div>
       </div>
   </body>
