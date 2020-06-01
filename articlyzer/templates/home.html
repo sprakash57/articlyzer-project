@@ -128,6 +128,10 @@
         <h6 class="statsstyle">Total words: {{ count }}</h6>
         <h6 class="statsstyle"> Top 3 frequent words: {{ mostfrqwords }} </h6>
         <h6 class="statsstyle">Time to read the text: {{ time }} {{ unit }}</h6>
+        <h6 class="statsstyle">Important words:</h6>
+        {% for ent in lst_entities %}
+        <h6 class="statsstyle">{{ ent }}</h6>
+        {% endfor %}
       </div>
       <div class="col-md-4 col-sm-8">
         <div class="row">
