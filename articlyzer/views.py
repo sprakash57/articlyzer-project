@@ -10,68 +10,56 @@ nlp = spacy.load('en_core_web_lg')
 def home(request):
     return render(request, 'home.html')
 
-def about(request):
-    return render(request, 'about.html')
     
 def count(request):
     fulltext = request.POST['fulltext']
 
     doc = nlp(fulltext)
-    print('doc :', doc)
 
-    wordlist = fulltext.split()
-
-    worddict = {}
-    l = []
-    cntr = 0
-    total_count = 0
     lst_entities = []
     lst_ent = []
     set_lst_entities = set()
+    most_common_words = []
 
-    for word in wordlist:
-        total_count += 1
-        if nlp.vocab[word].is_stop == False:
-            if word in worddict:
-                #Increase the counter
-                worddict[word] += 1
-                cntr+=1
-            else:
-                #add to dictionary
-                worddict[word] = 1
-                cntr+=1
-        else:
-            pass
+    
+    words = [token.text for token in doc if token.is_stop != True and token.is_punct != True]
+    len_text = len(doc)
+    word_freq = Counter(words)
+    common_words = word_freq.most_common(5)
+    # most_common_words = [k[0] for k in common_words]
+    # most_common_words_count = [k[1] for k in common_words]
+    for k in common_words:
+        most_common_words.append(k[0])
+        most_common_words.append(k[1])
+
+    print("common_words", common_words)
+    # print("most_common_words_count", most_common_words_count)
     
     if doc.ents:
         for ent in doc.ents:
-            text = ent.text
-            lst_ent.append(text)
-            label = ent.label_
-            lst_ent.append(label)
-            explain = str(spacy.explain(ent.label_))
-            lst_ent.append(explain)
-            if text not in set_lst_entities:
-                lst_entities.append(lst_ent)
-                set_lst_entities.add(text)
-            else:
-                pass
-            lst_ent = []
 
-    k = Counter(worddict)
-    high = k.most_common(3)
-    for items in high:
-        l.append(items[0])
+            if ent.text in common_words[0]:
+                text = ent.text
+                # lst_ent.append(text)
+                if text not in set_lst_entities:
+                    lst_entities.append(text)
+                    set_lst_entities.add(text)
+                else:
+                    pass
 
-    mfw = ', '.join(l)
-    val = math.ceil(total_count/200)
+    val = math.ceil(len_text/200) * 60
 
-    if val > 1:
-        unit = 'minutes'
-    else:
-        unit = 'minute'
+    if val < 60:
+        unit = 'second(s)'
+        val = val
+    elif val >= 60 and val < 3600:
+        unit = 'minute(s)'
+        val = val/60
+    elif val >= 3600:
+        unit = 'hour(s)'
+        val = val/3600
 
-    return render(request, 'home.html', {'count':len(wordlist), \
-                'mostfrqwords':mfw, 'time':val, 'unit': unit, 'fulltext': fulltext, \
+    return render(request, 'home.html', {'count':len_text, \
+                'mostfrqwords':common_words, \
+                'time':val, 'unit': unit, 'fulltext': doc, \
                 'lst_entities': lst_entities})
-                # 'text': text, 'label': label, 'explain': explain})
