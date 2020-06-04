@@ -9,7 +9,8 @@ from nltk.tokenize import word_tokenize
 
 abc = nltk.download('wordnet')
 abcd = nltk.download('stopwords')
-abcd = nltk.download('punkt')
+abcde = nltk.download('punkt')
+# abcdef = nltk.download('averaged_perceptron_tagger')
 # nlp = spacy.load('en_core_web_sm')
 sr = stopwords.words('english')
 sr.append('.')
