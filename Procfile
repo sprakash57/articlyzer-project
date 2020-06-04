@@ -1,1 +1,1 @@
-web: gunicorn articlyzer.wsgi && python -m nltk.downloader stopwords
+web: gunicorn articlyzer.wsgi

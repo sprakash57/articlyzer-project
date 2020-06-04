@@ -7,7 +7,8 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
-abc = nltk.download('all')
+abc = nltk.download('wordnet')
+abcd = nltk.download('stopwords')
 # nlp = spacy.load('en_core_web_sm')
 sr = stopwords.words('english')
 sr.append('.')
