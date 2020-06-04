@@ -9,6 +9,7 @@ from nltk.tokenize import word_tokenize
 
 abc = nltk.download('wordnet')
 abcd = nltk.download('stopwords')
+abcd = nltk.download('punkt')
 # nlp = spacy.load('en_core_web_sm')
 sr = stopwords.words('english')
 sr.append('.')
