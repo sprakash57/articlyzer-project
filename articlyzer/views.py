@@ -21,7 +21,7 @@ def home(request):
 
 
 def count(request):
-    article_content = '' if request.POST.get('article_content') is None else request.POST.get('article_content')
+    article_content = request.POST.get('article_content', '')
     # doc = nlp(article_content)
 
     # lst_entities = []
