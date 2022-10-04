@@ -21,9 +21,9 @@ def home(request):
 
 
 def count(request):
-    fulltext = request.POST['fulltext']
+    article_content = request.POST['article_content']
 
-    # doc = nlp(fulltext)
+    # doc = nlp(article_content)
 
     # lst_entities = []
     # lst_ent = []
@@ -31,8 +31,8 @@ def count(request):
     # most_common_words = []
 
     # words = [token.text for token in doc if token.is_stop != True and token.is_punct != True]
-    tokens = nltk.word_tokenize(fulltext)
-    len_text = len(tokens)
+    tokens = nltk.word_tokenize(article_content)
+    total_words_count = len(tokens)
 
     clean_tokens = tokens[:]
 
@@ -42,7 +42,7 @@ def count(request):
             clean_tokens.remove(token)
 
     freq = nltk.FreqDist(clean_tokens)
-    freq_cmn = freq.most_common(5)
+    frequent_words = freq.most_common(5)
     tagged = nltk.pos_tag(tokens)
     token_ent = nltk.ne_chunk(tagged, binary=True)
 
@@ -51,14 +51,7 @@ def count(request):
     #     most_common_words.append(key)
     #     most_common_words.append(value)
 
-    # len_text = len(doc)
-
-    print('fulltext------->', fulltext)
-    print('token_ent------>', token_ent)
-    print('len_text------->', len_text)
-    print('clean_tokens------->', clean_tokens)
-    print('tokens------->', tokens)
-    print('freq_cmn------->', freq_cmn)
+    # total_words_count = len(doc)
 
     # word_freq = Counter(words)
     # common_words = word_freq.most_common(5)
@@ -83,20 +76,26 @@ def count(request):
     #             else:
     #                 pass
 
-    val = math.ceil(len_text / 200) * 60
+    time_to_read = (total_words_count / 200) * 60
 
-    if val < 60:
-        unit = 'second(s)'
-        val = val
-    elif 60 <= val < 3600:
-        unit = 'minute(s)'
-        val = val / 60
-    elif val >= 3600:
-        unit = 'hour(s)'
-        val = val / 3600
+    if time_to_read < 60:
+        time_unit = 'second'
+        time_to_read = time_to_read
+    elif 60 <= time_to_read < 3600:
+        time_unit = 'minute'
+        time_to_read = time_to_read / 60
+    elif time_to_read >= 3600:
+        time_unit = 'hour'
+        time_to_read = time_to_read / 3600
 
     return render(
         request,
         'home.html',
-        {'count': len_text, 'time': val, 'unit': unit, 'fulltext': fulltext, 'mostfrqwords': freq_cmn}
+        {
+            'total_words_count': total_words_count,
+            'time_to_read': round(time_to_read),
+            'time_unit': time_unit + 's' if time_to_read > 1 else time_unit,
+            'article_content': article_content,
+            'frequent_words': frequent_words
+        }
     )

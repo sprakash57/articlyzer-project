@@ -47,7 +47,7 @@
       color: #fff;
       text-shadow: 0 .1rem .3rem rgba(0, 0, 0, .8);
     }
-    .statsstyle {
+    .result {
       font-family: monospace;
     }
     .brand-text {
@@ -108,38 +108,31 @@
             <form action="/a/" method="POST">
                 {% csrf_token %}
                 <textarea placeholder="Whatever text you enter, Articlyzer will analyse and spit out the results"
-                          class="form-control shadow-lg" name="fulltext" rows="10">{{fulltext}}</textarea>
+                          class="form-control shadow-lg" name="fulltext" rows="10">{{article_content}}</textarea>
         </div>
     </div>
     <div class="row ml-1 width-97">
+        {% if total_words_count > 0 %}
         <div class="col-md-8 col-sm-4 bg-light text-dark p-2 border mb-2">
-            <h5 class="statsstyle">Here are some facts based on this article</h5>
+            <h5 class="result">Here are some insights</h5>
             <ul>
                 <li>
-                    <h6 class="statsstyle">Total words: {{ count }}</h6>
+                    <h6 class="result">Total number of words {{ total_words_count }}</h6>
                 </li>
                 <li>
-                    <h6 class="statsstyle"> Most frequent words: </h6>
-                    {% for word in mostfrqwords %}
+                    <h6 class="result"> Most frequent words: </h6>
+                    {% for word in frequent_words %}
                     <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
                             title="{{ word.1 }}">{{ word.0 }}
                     </button>
                     {% endfor %}
                 </li>
                 <li>
-                    <h6 class="statsstyle">Time to read the article: {{ time }} {{ unit }}</h6>
+                    <h6 class="result">Time to read the article: {{ time_to_read }} {{ time_unit }}</h6>
                 </li>
-                <!-- <li>
-                  <h6 class="statsstyle">You can add more info to this article with the below keywords. Try clicking them.
-                  </h6>
-                </li> -->
             </ul>
-            <!-- {% for ent in lst_entities %}
-            <a target="_blank" href="">
-              <h6 class="statsstyle"> {{ ent }}</h6>
-            </a>
-            {% endfor %} -->
         </div>
+        {% endif %}
         <div class="col-md-4 col-sm-8">
             <div class="row">
                 <div class="col-sm-6 mb-2">
