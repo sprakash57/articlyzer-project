@@ -7,11 +7,11 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
-abc = nltk.download('wordnet')
-abcd = nltk.download('stopwords')
-abcde = nltk.download('punkt')
+# abc = nltk.download('wordnet')
+# abcd = nltk.download('stopwords')
+# abcde = nltk.download('punkt')
 # abcdef = nltk.download('averaged_perceptron_tagger')
-# nlp = spacy.load('en_core_web_sm')
+nltk_words = nltk.download('words')
 sr = stopwords.words('english')
 sr.append('.')
 
@@ -19,7 +19,7 @@ sr.append('.')
 def home(request):
     return render(request, 'home.html')
 
-    
+
 def count(request):
     fulltext = request.POST['fulltext']
 
@@ -30,7 +30,6 @@ def count(request):
     # set_lst_entities = set()
     # most_common_words = []
 
-    
     # words = [token.text for token in doc if token.is_stop != True and token.is_punct != True]
     tokens = nltk.word_tokenize(fulltext)
     len_text = len(tokens)
@@ -60,7 +59,6 @@ def count(request):
     print('clean_tokens------->', clean_tokens)
     print('tokens------->', tokens)
     print('freq_cmn------->', freq_cmn)
-    
 
     # word_freq = Counter(words)
     # common_words = word_freq.most_common(5)
@@ -72,7 +70,7 @@ def count(request):
 
     # print("common_words", common_words)
     # # print("most_common_words_count", most_common_words_count)
-    
+
     # if doc.ents:
     #     for ent in doc.ents:
 
@@ -85,18 +83,20 @@ def count(request):
     #             else:
     #                 pass
 
-    val = math.ceil(len_text/200) * 60
+    val = math.ceil(len_text / 200) * 60
 
     if val < 60:
         unit = 'second(s)'
         val = val
-    elif val >= 60 and val < 3600:
+    elif 60 <= val < 3600:
         unit = 'minute(s)'
-        val = val/60
+        val = val / 60
     elif val >= 3600:
         unit = 'hour(s)'
-        val = val/3600
+        val = val / 3600
 
-    return render(request, 'home.html', {'count':len_text, \
-                'time':val, 'unit': unit, 'fulltext': fulltext, \
-                'mostfrqwords': freq_cmn})
+    return render(
+        request,
+        'home.html',
+        {'count': len_text, 'time': val, 'unit': unit, 'fulltext': fulltext, 'mostfrqwords': freq_cmn}
+    )
