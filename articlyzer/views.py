@@ -21,8 +21,7 @@ def home(request):
 
 
 def count(request):
-    article_content = request.POST['article_content']
-
+    article_content = request.POST.get('article_content', '')
     # doc = nlp(article_content)
 
     # lst_entities = []
@@ -38,7 +37,6 @@ def count(request):
 
     for token in tokens:
         if token in sr:
-            print('token------->', token)
             clean_tokens.remove(token)
 
     freq = nltk.FreqDist(clean_tokens)
