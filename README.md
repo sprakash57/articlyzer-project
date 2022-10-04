@@ -7,7 +7,7 @@ used in it.
 
 ## Demo
 
-You can experience the live demo [https://articlyzer-project.herokuapp.com/](here).
+You can experience the live demo [here](https://articlyzer-project.herokuapp.com).
 
 ## Technology stack
 - Python
