@@ -7,10 +7,10 @@ import nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 
-# abc = nltk.download('wordnet')
-# abcd = nltk.download('stopwords')
-# abcde = nltk.download('punkt')
-# abcdef = nltk.download('averaged_perceptron_tagger')
+abc = nltk.download('wordnet')
+abcd = nltk.download('stopwords')
+abcde = nltk.download('punkt')
+abcdef = nltk.download('averaged_perceptron_tagger')
 nltk_words = nltk.download('words')
 sr = stopwords.words('english')
 sr.append('.')
