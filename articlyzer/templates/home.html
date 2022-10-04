@@ -1,40 +1,29 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     {% load staticfiles %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- <meta name="description" content=""> -->
-    <!-- <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors"> -->
-    <!-- <meta name="generator" content="Jekyll v3.8.6"> -->
     <title>Articlyzer</title>
-    <!-- <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/cover/"> -->
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap" rel="stylesheet">
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-    <link rel="mask-icon" href="/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
-    <link rel="icon" href="/docs/4.4/assets/img/favicons/favicon.ico">
-    <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml">
+    <link rel="shortcut icon" href="{% static 'favicon.png' %}" type="image/png">
     <meta name="theme-color" content="#563d7c">
 
     <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
+    .analyze-btn {
+        width: 120px;
     }
-    .colbckgrnd {
-      /* background-image: url("paper.gif"); */
-      background-color: #cccccc;
+    .body-bg {
+      background-color: #e8e2d6;
+    }
+    .brand-text {
+      font-family: 'Abril Fatface', cursive;
+      font-size: 2rem;
+      vertical-align: bottom;
+      letter-spacing: 2px;
     }
     .footer {
       position: fixed;
@@ -43,139 +32,180 @@
       width: 100%;
       text-align: center;
     }
-    .textcolor {
-      color: #fff;
-      text-shadow: 0 .1rem .3rem rgba(0, 0, 0, .8);
+    .form-buttons {
+        display: flex;
+        align-items: center;
+        margin: 2rem 0;
+        justify-content: space-around;
     }
     .result {
       font-family: monospace;
+      margin: 0;
+      border-radius: 0.25rem;
+      padding: 1rem;
+      background-color: white;
     }
-    .brand-text {
-      font-family: 'Abril Fatface', cursive;
-      font-size: 2rem;
-      vertical-align: bottom;
-      letter-spacing: 2px;
+    .result ul {
+        padding: 0 1rem;
     }
-    .resetbutton {
+    .result li {
+        margin-bottom: 0.5rem;
+    }
+    .result h4 {
+        font-family: sans-serif;
+        font-weight: 800;
+        letter-spacing: 1px;
+    }
+    .result strong {
+        padding: 0.2rem 0.3rem;
+        background-color: #FBF719;
+        border-radius: 5px;
+        font-size: 1rem;
+        box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
+    }
+    .result-text {
+        margin-right: 1rem;
+        color: hwb(0deg 0% 100% / 60%);
+        margin: 0;
+    }
+    .result-words {
+        background-color: #5A6268;
+        padding: 0.5rem 1.8rem 0.5rem 0.5rem;
+        border-radius: 0.5rem;
+        color: white;
+        margin-bottom: 0.5rem;
+        position: relative;
+        display: inline-block;
+        margin-bottom: 0.5rem;
+    }
+    .result-words::after {
+        content: attr(data-count);
+        position: absolute;
+        width: 18px;
+        height: 18px;
+        background-color: #FBF719;
+        top: calc(50% - 9px);
+        right: 4px;
+        text-align: center;
+        line-height: normal;
+        border-radius: 50%;
+        color: black;
+    }
+    .reset-btn {
       background-color: #df2b3d;
       color: #fff;
       border-radius: .25rem;
       text-align: center;
       padding: 7px;
       display: block;
-      width: 100%;
+      width: 120px;
       font-size: 16px;
       box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .15);
     }
-    .resetbutton:hover {
+    .reset-btn:hover {
       color: #fff;
       background-color: #e01227;
       text-decoration: none;
     }
-    .width-97 {
-      width: 97%;
+    .word-count {
+        padding: 0.5rem;
+        border-radius: 50%;
+        background-color: green;
     }
     @media (min-width: 768px) {
       .bd-placeholder-img-lg {
         font-size: 3.5rem;
       }
+      .form-buttons {
+        margin: 2rem 9rem;
+      }
     }
-
     </style>
 </head>
-
-<body class="colbckgrnd">
-<nav class="navbar navbar-expand-sm bg-light navbar-light">
-    <section>
-        <img src="{% static 'file.png' %}" alt="image" height="40" width="40">
-        <span class="brand-text ml-2">Articlyzer</span>
-        <sub><a href="https://github.com/biswain2309/articlyzer-project/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer">v1.2.0</a></sub>
-    </section>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-            <a rel="noopener noreferrer" target="_blank" class="nav-link" href="https://github.com/biswain2309/articlyzer-project">GitHub</a>
-        </li>
-        <li class="nav-item">
-            <a rel="noopener noreferrer" target="_blank" class="nav-link" href="https://www.linkedin.com/in/ibiswas">LinkedIn</a>
-        </li>
-    </ul>
-</nav>
-
-<div class="container mt-3">
-    <div class="row mb-3">
-        <div class="col-12">
-            <h4 class="textcolor">Please enter your text here</h4>
-            <form action="/a/" method="POST">
-                {% csrf_token %}
-                <textarea placeholder="Whatever text you enter, Articlyzer will analyse and spit out the results"
-                          class="form-control shadow-lg" name="fulltext" rows="10">{{article_content}}</textarea>
-        </div>
-    </div>
-    <div class="row ml-1 width-97">
-        {% if total_words_count > 0 %}
-        <div class="col-md-8 col-sm-4 bg-light text-dark p-2 border mb-2">
-            <h5 class="result">Here are some insights</h5>
-            <ul>
-                <li>
-                    <h6 class="result">Total number of words {{ total_words_count }}</h6>
-                </li>
-                <li>
-                    <h6 class="result"> Most frequent words: </h6>
-                    {% for word in frequent_words %}
-                    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom"
-                            title="{{ word.1 }}">{{ word.0 }}
-                    </button>
-                    {% endfor %}
-                </li>
-                <li>
-                    <h6 class="result">Time to read the article: {{ time_to_read }} {{ time_unit }}</h6>
-                </li>
-            </ul>
-        </div>
-        {% endif %}
-        <div class="col-md-4 col-sm-8">
-            <div class="row">
-                <div class="col-sm-6 mb-2">
-                    <button type="submit" class="btn btn-block btn-success shadow">Analyse</button>
-                </div>
-                <div class="col-sm-6">
-                    <a rel="noopener noreferrer" class="resetbutton" href="{% url 'home' %}">Reset</a>
-                </div>
+<body class="body-bg">
+    <nav class="navbar navbar-expand-sm bg-light navbar-light">
+        <section>
+            <img src="{% static 'file.png' %}" alt="image" height="40" width="40">
+            <span class="brand-text ml-2">Articlyzer</span>
+            <sub><a href="https://github.com/biswain2309/articlyzer-project/blob/master/CHANGELOG.md" target="_blank" rel="noopener noreferrer">v1.2.0</a></sub>
+        </section>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a rel="noopener noreferrer" target="_blank" class="nav-link" href="https://github.com/biswain2309/articlyzer-project">GitHub</a>
+            </li>
+            <li class="nav-item">
+                <a rel="noopener noreferrer" target="_blank" class="nav-link" href="https://www.linkedin.com/in/ibiswas">LinkedIn</a>
+            </li>
+        </ul>
+    </nav>
+    <main class="container mt-3">
+        <section class="row">
+            <div class="col-12 pt-3">
+                <form action="/a/" method="POST">
+                    {% csrf_token %}
+                    <textarea minlength="1" placeholder="Paste/Type your article here..." class="form-control shadow-lg" name="article_content" rows="15">{{article_content}}</textarea>
+                    <div class="form-buttons">
+                        <button type="submit" class="btn btn-block btn-success shadow analyze-btn">Analyze</button>
+                        <a rel="noopener noreferrer" class="reset-btn" href="{% url 'home' %}">Reset</a>
+                    </div>
+                </form>
             </div>
+        </section>
+        <section>
+            {% if total_words_count > 0 %}
+            <div class="shadow-lg result">
+                <h4 class="mb-4">Here are some insights</h4>
+                <ul>
+                    <li>
+                        <div class="d-flex align-items-baseline">
+                            <p class="result-text mr-2">Total number of words</p>
+                            <strong>{{ total_words_count }}</strong>
+                        </div>
+                    </li>
+                    <li>
+                        <p class="result-text">Most frequent words are</p>
+                        <div class="mt-3 mb-3">
+                            {% for word in frequent_words %}
+                            <span class="result-words" data-count="{{ word.1 }}">{{ word.0 }}</span>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <li>
+                        <div class="d-flex align-items-baseline">
+                            <p class="result-text mr-2">Time to read the article</p>
+                            <strong>{{ time_to_read }} {{ time_unit }}</strong>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            {% endif %}
+        </section>
+        <section class="row">
+            <div class="col-12 mt-2">
+                <small>
+                    **Time to read calculation is based on this
+                    <span>
+                        <a rel="noopener noreferrer" target="_blank" href="https://ezinearticles.com/?What-is-the-Average-Reading-Speed-and-the-Best-Rate-of-Reading?&id=2298503">link</a>
+                    </span>
+                </small>
+            </div>
+        </section>
+    </main>
+    <footer class="text-muted">
+        <!-- <div class="container text-center"> -->
+        <div class="footer">
+            <p>© Indrani Biswas {% now "Y" %}</p>
         </div>
-    </div>
-    </form>
-    <div class="row">
-        <div class="col-12 mt-2">
-            <small>**Time to read calculation is based on the <span><a rel="noopener noreferrer"
-                                                                       href="https://ezinearticles.com/?What-is-the-Average-Reading-Speed-and-the-Best-Rate-of-Reading?&id=2298503">link</a></span>
-            </small>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-12">
-            <small>Liked my work? Please visit my <a rel="noopener noreferrer" target="_blank"
-                                                     href="https://www.linkedin.com/feed/">LinkedIn page.</a></small>
-        </div>
-    </div>
-</div>
-<footer class="text-muted">
-    <!-- <div class="container text-center"> -->
-    <div class="footer">
-        <p>© Indrani Biswas {% now "Y" %}</p>
-    </div>
-</footer>
-</body>
+    </footer>
 
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
 </body>
-
 </html>
